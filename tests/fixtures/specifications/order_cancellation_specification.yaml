@@ -1,0 +1,29 @@
+schema_version: "1"
+name: Customer-requested order cancellation
+rules:
+  - id: load-order-before-cancellation
+    type: required_action
+    tool_name: get_order
+
+  - id: do-not-refund-without-review
+    type: forbidden_action
+    tool_name: issue_refund
+
+  - id: cancel-after-loading-order
+    type: action_ordering
+    tool_names:
+      - get_order
+      - cancel_order
+      - notify_customer
+
+  - id: cancel-once
+    type: execution_count
+    tool_name: cancel_order
+    exactly: 1
+
+  - id: cancellation-has-approved-reason
+    type: argument_matching
+    tool_name: cancel_order
+    expected_arguments:
+      order_id: ORD-1001
+      reason: customer_request
