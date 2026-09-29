@@ -1,0 +1,29 @@
+schema_version: "1"
+name: cancel-order
+rules:
+  - id: get-order-executed
+    type: required_action
+    tool_name: get_order
+
+  - id: policy-check-executed
+    type: required_action
+    tool_name: check_cancellation_policy
+
+  - id: cancel-order-executed
+    type: required_action
+    tool_name: cancel_order
+
+  - id: policy-before-cancellation
+    type: action_ordering
+    tool_names:
+      - check_cancellation_policy
+      - cancel_order
+
+  - id: no-refund
+    type: forbidden_action
+    tool_name: issue_refund
+
+  - id: cancel-once
+    type: execution_count
+    tool_name: cancel_order
+    exactly: 1

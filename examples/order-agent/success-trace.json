@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "run_id": "order-agent-success",
+  "tool_calls": [
+    {
+      "sequence_number": 1,
+      "tool_name": "get_order",
+      "arguments": {
+        "order_id": "ORD-1001"
+      },
+      "execution_status": "succeeded"
+    },
+    {
+      "sequence_number": 2,
+      "tool_name": "check_cancellation_policy",
+      "arguments": {
+        "order_id": "ORD-1001"
+      },
+      "execution_status": "succeeded"
+    },
+    {
+      "sequence_number": 3,
+      "tool_name": "cancel_order",
+      "arguments": {
+        "order_id": "ORD-1001"
+      },
+      "execution_status": "succeeded"
+    }
+  ]
+}
