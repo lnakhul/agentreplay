@@ -1,5 +1,6 @@
 """AgentReplay deterministic execution-trace contracts."""
 
+from agentreplay.evaluation_engine import EvaluationEngine
 from agentreplay.models import (
     ActionOrderingRule,
     AgentExecutionTrace,
@@ -19,6 +20,7 @@ __all__ = [
     "AgentExecutionTrace",
     "AgentTestSpecification",
     "ArgumentMatchingRule",
+    "EvaluationEngine",
     "EvaluationReport",
     "EvaluationViolation",
     "ExecutionCountRule",

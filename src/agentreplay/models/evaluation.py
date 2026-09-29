@@ -8,6 +8,8 @@ from agentreplay.models._base import DomainModel
 from agentreplay.models.specification import RuleType
 
 type CallIndex = Annotated[int, Field(ge=0)]
+type SequenceNumber = Annotated[int, Field(ge=1)]
+type ToolName = Annotated[str, Field(min_length=1)]
 
 
 class EvaluationViolation(DomainModel):
@@ -18,7 +20,9 @@ class EvaluationViolation(DomainModel):
     summary: str = Field(min_length=1)
     expected: JsonValue | None = None
     observed: JsonValue | None = None
+    tool_names: tuple[ToolName, ...] = ()
     call_indexes: tuple[CallIndex, ...] = ()
+    sequence_numbers: tuple[SequenceNumber, ...] = ()
 
 
 class EvaluationReport(DomainModel):

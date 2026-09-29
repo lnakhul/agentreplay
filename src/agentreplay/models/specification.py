@@ -34,19 +34,19 @@ class ActionRule(DomainModel):
 
 
 class RequiredActionRule(ActionRule):
-    """Requires at least one call to a tool."""
+    """Requires at least one successful call to a tool."""
 
     type: Literal[RuleType.REQUIRED_ACTION] = RuleType.REQUIRED_ACTION
 
 
 class ForbiddenActionRule(ActionRule):
-    """Prohibits every call to a tool."""
+    """Prohibits every recorded invocation of a tool, regardless of status."""
 
     type: Literal[RuleType.FORBIDDEN_ACTION] = RuleType.FORBIDDEN_ACTION
 
 
 class ActionOrderingRule(DomainModel):
-    """Requires the named actions to occur in the specified order."""
+    """Requires successful named actions to occur as an ordered subsequence."""
 
     id: str = Field(min_length=1)
     type: Literal[RuleType.ACTION_ORDERING] = RuleType.ACTION_ORDERING
@@ -70,7 +70,7 @@ class ActionOrderingRule(DomainModel):
 
 
 class ExecutionCountRule(ActionRule):
-    """Constrains the number of invocations for one tool."""
+    """Constrains the number of recorded invocations for one tool, regardless of status."""
 
     type: Literal[RuleType.EXECUTION_COUNT] = RuleType.EXECUTION_COUNT
     exactly: int | None = Field(default=None, ge=0)
@@ -90,7 +90,10 @@ class ExecutionCountRule(ActionRule):
 
 
 class ArgumentMatchingRule(ActionRule):
-    """Requires a tool call with an exactly matching JSON arguments object."""
+    """Requires a call whose arguments object exactly equals the expected object.
+
+    Additional recorded arguments cause the rule to fail.
+    """
 
     type: Literal[RuleType.ARGUMENT_MATCHING] = RuleType.ARGUMENT_MATCHING
     expected_arguments: dict[str, JsonValue] = Field(default_factory=dict)
