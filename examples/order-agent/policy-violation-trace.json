@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "run_id": "order-agent-success",
+  "run_id": "order-agent-policy-violation",
   "tool_calls": [
     {
       "sequence_number": 1,
@@ -12,7 +12,7 @@
     },
     {
       "sequence_number": 2,
-      "tool_name": "check_cancellation_policy",
+      "tool_name": "cancel_order",
       "arguments": {
         "order_id": "12345"
       },
@@ -20,7 +20,7 @@
     },
     {
       "sequence_number": 3,
-      "tool_name": "cancel_order",
+      "tool_name": "check_cancellation_policy",
       "arguments": {
         "order_id": "12345"
       },

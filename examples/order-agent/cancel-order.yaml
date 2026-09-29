@@ -26,4 +26,4 @@ rules:
   - id: cancel-once
     type: execution_count
     tool_name: cancel_order
-    exactly: 1
+    at_most: 1

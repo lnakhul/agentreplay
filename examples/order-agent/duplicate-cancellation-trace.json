@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "run_id": "order-agent-success",
+  "run_id": "order-agent-duplicate-cancellation",
   "tool_calls": [
     {
       "sequence_number": 1,
@@ -20,6 +20,14 @@
     },
     {
       "sequence_number": 3,
+      "tool_name": "cancel_order",
+      "arguments": {
+        "order_id": "12345"
+      },
+      "execution_status": "succeeded"
+    },
+    {
+      "sequence_number": 4,
       "tool_name": "cancel_order",
       "arguments": {
         "order_id": "12345"
